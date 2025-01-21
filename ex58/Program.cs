@@ -31,16 +31,22 @@ void PrintMatrix(int[,] matrix)
 
 int[,] MartixMultiplication(int[,] A, int[,] B)
 {
-    if (A.GetLength(1) != B.GetLength(0))
-        System.Console.WriteLine("Матрицы нельзя перемножить");
     int[,] C = new int[A.GetLength(0), B.GetLength(1)];
-    for (int i = 0; i < A.GetLength(0); i++)
+    if (A.GetLength(1) != B.GetLength(0))
     {
-        for (int j = 0; j < B.GetLength(1); j++)
+        System.Console.WriteLine("\nМАТРИЦЫ НЕЛЬЗЯ ПЕРЕМНОЖИТЬ!\n");
+        return C;
+    }
+    else
+    {
+        for (int i = 0; i < A.GetLength(0); i++)
         {
-            for (int k = 0; k < B.GetLength(0); k++)
+            for (int j = 0; j < B.GetLength(1); j++)
             {
-                C[i, j] += A[i, k] * B[k, j];
+                for (int k = 0; k < B.GetLength(0); k++)
+                {
+                    C[i, j] += A[i, k] * B[k, j];
+                }
             }
         }
     }
@@ -49,11 +55,11 @@ int[,] MartixMultiplication(int[,] A, int[,] B)
 
 // --------------------------------------------------------
 
-int[,] A = GenerateMatrix(4, 3);
+int[,] A = GenerateMatrix(2, 3);
 System.Console.WriteLine("Исходная матрица A:");
 PrintMatrix(A);
 
-int[,] B = GenerateMatrix(3, 4);
+int[,] B = GenerateMatrix(3, 2);
 System.Console.WriteLine("Исходная матрица B:");
 PrintMatrix(B);
 
